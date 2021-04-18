@@ -1,29 +1,32 @@
 package com.management.management.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDate;
 
+
 @Entity
-@Getter
-@Setter
-@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@RequiredArgsConstructor
+@Data
 public class Person {
     @Id
     @GeneratedValue
     private Long id;
 
+    @NonNull
     private String name;
 
+    @NonNull
     private int age;
 
     private String hobby;
 
+    @NonNull
     private String bloodType;
 
     private String address;
@@ -32,22 +35,6 @@ public class Person {
 
     private String job;
 
-//    @Override
-//    public String toString() {
-//        return "Person{" +
-//                "id=" + id +
-//                ", name='" + name + '\'' +
-//                ", age=" + age +
-//                ", hobby='" + hobby + '\'' +
-//                ", bloodType='" + bloodType + '\'' +
-//                ", address='" + address + '\'' +
-//                ", birthday=" + birthday +
-//                ", job='" + job + '\'' +
-//                ", phoneNumber='" + phoneNumber + '\'' +
-//                '}';
-//    }
-
-    //롬복을 통한 ToString 위에서도 선언했다.
     @ToString.Exclude
     private String phoneNumber;
 }
