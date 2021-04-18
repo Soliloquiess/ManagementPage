@@ -1,0 +1,9 @@
+package com.management.management.repository;
+
+import com.management.management.domain.Person;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PersonRepository extends JpaRepository<Person, Long> {
+
+
+}
