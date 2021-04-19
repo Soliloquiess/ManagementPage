@@ -1,10 +1,10 @@
 package com.management.management.domain;
 
+import com.management.management.domain.dto.Birthday;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-
 
 @Entity
 @NoArgsConstructor
@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Data
 public class Person {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NonNull
@@ -29,7 +29,9 @@ public class Person {
 
     private String address;
 
-    private LocalDate birthday;
+//    @Valid
+    @Embedded
+    private Birthday birthday;
 
     private String job;
 
