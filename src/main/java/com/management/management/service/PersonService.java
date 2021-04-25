@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
-
 @Service
 @Slf4j
 public class PersonService {
@@ -24,11 +23,7 @@ public class PersonService {
 
 //    @Transactional(readOnly = true)
     public Person getPerson(Long id) {
-        Person person = personRepository.findById(id).orElse(null);
-
-        log.info("person : {}", person);
-
-        return person;
+        return personRepository.findById(id).orElse(null);
     }
 
     @Transactional
