@@ -1,0 +1,11 @@
+package com.management.management.exception;
+
+@Slf4j
+public class RenameIsNotPermittedException extends RuntimeException {
+    private static final String MESSAGE = "이름 변경이 허용되지 않습니다";
+
+    public RenameIsNotPermittedException() {
+        super(MESSAGE);
+        log.error(MESSAGE);
+    }
+}

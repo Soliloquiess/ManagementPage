@@ -17,27 +17,32 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class HelloWorldControllerTest {
     @Autowired
-    private HelloWorldController HelloWorldController;
+    private WebApplicationContext wac;
 
     private MockMvc mockMvc;
-    @Test
-    void helloWorld() {
-        System.out.println(HelloWorldController.helloWorld());
 
-        assertThat(HelloWorldController.helloWorld()).isEqualTo("HelloWorld");
-//        assertThat(HelloWorldController.HelloWorldController()).isEqualTo("HelloWorld");
-        //AssertionThat(2번쨰꺼 넣음)
+    @BeforeEach
+    void beforeEach() {
+        mockMvc = MockMvcBuilders
+                .webAppContextSetup(wac)
+                .alwaysDo(print())
+                .build();
     }
 
     @Test
-    void mockMvcTest() throws Exception {
-        mockMvc = MockMvcBuilders.standaloneSetup(HelloWorldController).build();
-
+    void helloWorld() throws Exception {
         mockMvc.perform(
-//                MockMvcRequestBuilders.get("/api/helloWorld"))
-        MockMvcRequestBuilders.post("/api/helloWorld"))
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                MockMvcRequestBuilders.get("/api/helloWorld"))
+                .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string("HelloWorld"));
+    }
+
+    @Test
+    void helloException() throws Exception {
+        mockMvc.perform(
+                MockMvcRequestBuilders.get("/api/helloException"))
+                .andExpect(status().isInternalServerError())
+                .andExpect(jsonPath("$.code").value(500))
+                .andExpect(jsonPath("$.message").value("알 수 없는 서버 오류가 발생하였습니다"));
     }
 }
